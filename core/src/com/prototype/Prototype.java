@@ -115,9 +115,10 @@ public class Prototype implements ApplicationListener {
 
         batch.end();
 
-        if (Gdx.input.justTouched())
+        if (Gdx.input.justTouched()) {
             if (act < 3)
                 act++;
+        }
 
 
 
