@@ -17,7 +17,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import components.DialogBox;
+import components.FinalScene;
+import components.Scene;
+
 
 public class Prototype implements ApplicationListener {
 
@@ -46,11 +48,12 @@ public class Prototype implements ApplicationListener {
     Texture[] textures;
     float variacao = 0;
     float movimentacao = -200;
-    // Teste
-//    DialogBox dialogBox;
 
 	@Override
 	public void create() {
+
+        Fabrica fabrica = new Fabrica();
+        Gdx.app.log("TESTE", fabrica.readAllScenes().size() + "");
 
         rectangle = new Rectangle();
         layout = new GlyphLayout();
@@ -68,8 +71,6 @@ public class Prototype implements ApplicationListener {
         TextField.TextFieldStyle tfs = new TextField.TextFieldStyle();
         tfs.font = text;
         textField = new TextField("Qual é o seu nome?", tfs);
-
-//        dialogBox = new DialogBox("Oi, eu sou o Goku!", new Texture(Gdx.files.internal("dialogBox.png")), batch, 50, 150, 300, 100, 4)
 
         alturaDispositivo = VIRTUAL_HEIGHT = Gdx.graphics.getHeight();
         larguraDispositivo = VIRTUAL_WIDTH = Gdx.graphics.getWidth();
