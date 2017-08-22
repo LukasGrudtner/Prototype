@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 public abstract class Scene {
 
     protected int index;
-    protected String background;
+    protected Texture background;
     protected String text;
-//    protected Click click;
+    protected Click click;
 
 
     public int getIndex() {
@@ -22,11 +22,11 @@ public abstract class Scene {
         this.index = index;
     }
 
-    public String getBackground() {
+    public Texture getBackground() {
         return background;
     }
 
-    public void setBackground(String background) {
+    public void setBackground(Texture background) {
         this.background = background;
     }
 
@@ -36,5 +36,13 @@ public abstract class Scene {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Click getClick() {
+        return click;
+    }
+
+    public void setClick(Click click) {
+        this.click = click;
     }
 }

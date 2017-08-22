@@ -1,28 +1,30 @@
 package components;
 
+import com.badlogic.gdx.graphics.Texture;
+
 /**
  * Created by Lukas on 21/08/2017.
  */
 
 public class Click {
 
-    String objectImagePath;
+    Texture image;
     int x, y, length, width;
 
-    public Click(String objectImagePath, int x, int y, int length, int width) {
-        this.objectImagePath = objectImagePath;
+    public Click(Texture image) {//, int x, int y, int length, int width) {
+        this.image = image;
         this.x = x;
         this.y = y;
         this.length = length;
         this.width = width;
     }
 
-    public String getObjectImagePath() {
-        return objectImagePath;
+    public Texture getImage() {
+        return image;
     }
 
-    public void setObjectImagePath(String objectImagePath) {
-        this.objectImagePath = objectImagePath;
+    public void setImage(Texture image) {
+        this.image = image;
     }
 
     public int getX() {

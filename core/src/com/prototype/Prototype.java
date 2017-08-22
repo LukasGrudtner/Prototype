@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.ArrayList;
+
 import components.FinalScene;
 import components.Scene;
 
@@ -31,10 +33,10 @@ public class Prototype implements ApplicationListener {
     Sprite seta;
     Rectangle rectangle;
     TextField textField;
-
-    boolean finalizar = false;
-
-    int act = 1;
+    private Fabrica fabrica;
+    private ArrayList<Scene> scenes;
+    private int currentScene = 0;
+    private int numberGame;
 
     float alturaDispositivo = 0;
     float larguraDispositivo = 0;
@@ -49,28 +51,25 @@ public class Prototype implements ApplicationListener {
     float variacao = 0;
     float movimentacao = -200;
 
+    public Prototype(int numberGame) {
+        this.numberGame = numberGame;
+    }
+
 	@Override
 	public void create() {
 
-        Fabrica fabrica = new Fabrica();
-        Gdx.app.log("TESTE", fabrica.readAllScenes().size() + "");
+        fabrica = new Fabrica();
+        scenes = fabrica.getScenesGame(numberGame);
 
         rectangle = new Rectangle();
         layout = new GlyphLayout();
 
         batch = new SpriteBatch();
-        background = new Texture(Gdx.files.internal("fundo.png"));
-        background2 = new Texture(Gdx.files.internal("fundo2.png"));
-        background3 = new Texture(Gdx.files.internal("fundo3.png"));
         dialogBox = new Sprite(new Texture(Gdx.files.internal("dialogBox.png")));
         seta = new Sprite(new Texture(Gdx.files.internal("seta.png")));
         dialogBox.setPosition(50, 150);
         text = new BitmapFont();
         text.getData().setScale(3);
-
-        TextField.TextFieldStyle tfs = new TextField.TextFieldStyle();
-        tfs.font = text;
-        textField = new TextField("Qual é o seu nome?", tfs);
 
         alturaDispositivo = VIRTUAL_HEIGHT = Gdx.graphics.getHeight();
         larguraDispositivo = VIRTUAL_WIDTH = Gdx.graphics.getWidth();
@@ -112,99 +111,44 @@ public class Prototype implements ApplicationListener {
         // Configurar dados de projeção da câmera
         batch.setProjectionMatrix(camera.combined);
 
-        // Desenha a textura
         batch.begin();
+        batch.draw(scenes.get(currentScene).getBackground(), 0, 0, larguraDispositivo, alturaDispositivo);
+        dialogBox.draw(batch);
+        layout.setText(text, scenes.get(currentScene).getText(), Color.BLACK, dialogBox.getWidth(), Align.center, true);
+        text.draw(batch, layout, dialogBox.getX()+(dialogBox.getWidth()-layout.width)/2 - 20, dialogBox.getY()+(dialogBox.getHeight()+layout.height)/2 + 50);
 
-        if (act == 1)
-            act1();
-        if (act == 2)
-            act2();
-        if (act == 3)
-            act3();
-        if (act == 4)
-            act4();
+        if (scenes.get(currentScene).getClick() != null) {
+            rectangle.set(larguraDispositivo-250, 50, 200, 125);
+            seta.setSize(200, 125);
+            seta.setPosition(larguraDispositivo-250, 50);
+            seta.draw(batch);
+        }
+
 
         batch.end();
 
         if (Gdx.input.justTouched()) {
-            if (act < 3)
-                act++;
-        }
 
-	}
+            if (scenes.get(currentScene).getClick() != null) {
+                int x = Gdx.input.getX();
+                int y = Gdx.input.getY();
 
-    private void act1() {
-        batch.draw(background, 0, 0, larguraDispositivo, alturaDispositivo);
-        dialogBox.draw(batch);
-        layout.setText(text, "Finalmente chegou o dia de ir ao dentista!", Color.BLACK, dialogBox.getWidth(), Align.center, true);
-        text.draw(batch, layout, dialogBox.getX()+(dialogBox.getWidth()-layout.width)/2 - 20, dialogBox.getY()+(dialogBox.getHeight()+layout.height)/2 + 50);
-    }
-
-    private void act2() {
-        batch.draw(background2, 0, 0, larguraDispositivo, alturaDispositivo);
-        dialogBox.draw(batch);
-        text.getData().setScale(2);
-        layout.setText(text, "E por isso este roteiro irá me ajudar a entender e aprender tudo que é preciso para tornar este dia muito especial!", Color.BLACK, dialogBox.getWidth()-50, Align.center, true);
-        text.draw(batch, layout, dialogBox.getX()+(dialogBox.getWidth()-layout.width)/2, dialogBox.getY()+(dialogBox.getHeight()+layout.height)/2+50);
-    }
-
-    private void act3() {
-        batch.draw(background3, 0, 0, larguraDispositivo, alturaDispositivo);
-        dialogBox.draw(batch);
-
-        rectangle.set(larguraDispositivo-250, 50, 200, 125);
-
-        seta.setSize(200, 125);
-        seta.setPosition(larguraDispositivo-250, 50);
-        seta.draw(batch);
-
-        text.getData().setScale(2);
-        layout.setText(text, "Quando você estiver pronto, aperte na seta para iniciarmos nossa jornada!", Color.BLACK, dialogBox.getWidth()-50, Align.center, true);
-        text.draw(batch, layout, dialogBox.getX()+(dialogBox.getWidth()-layout.width)/2, dialogBox.getY()+(dialogBox.getHeight()+layout.height)/2+50);
-
-        if (Gdx.input.isTouched()) {
-            int x = Gdx.input.getX();
-            int y = Gdx.input.getY();
-
-            if (rectangle.contains(x, alturaDispositivo-y))
-                act = 4;
-        }
-    }
-
-    private void act4() {
-        batch.draw(background, 0, 0, larguraDispositivo, alturaDispositivo);
-        if (variacao > 10)
-            variacao = 0;
-
-        if (movimentacao > Gdx.graphics.getWidth())
-            movimentacao = -200;
-
-        batch.draw(textures[(int) variacao], movimentacao, 800);
-        variacao += Gdx.graphics.getDeltaTime() * 10;
-        movimentacao += Gdx.graphics.getDeltaTime() * 400;
-
-        dialogBox.draw(batch);
-        text.getData().setScale(3);
-        layout.setText(text, "Aperte na seta para finalizar", Color.BLACK, dialogBox.getWidth()-50, Align.center, true);
-        text.draw(batch, layout, dialogBox.getX()+(dialogBox.getWidth()-layout.width)/2, dialogBox.getY()+(dialogBox.getHeight()+layout.height)/2+80);
-
-        rectangle.set(50, 50, 200, 125);
-
-        seta.setSize(200, 125);
-        seta.setPosition(50, 50);
-        seta.draw(batch);
-
-        if (Gdx.input.isTouched()) {
-            int x = Gdx.input.getX();
-            int y = Gdx.input.getY();
-
-            if (rectangle.contains(x, alturaDispositivo-y)) {
-                Gdx.app.log("TOUCHED", "foi clicado na tela " + act);
-                Gdx.app.exit();
+                if (rectangle.contains(x, alturaDispositivo - y)) {
+                    if (!scenes.get(currentScene).getClass().equals(FinalScene.class))
+                        currentScene++;
+                    else {
+                        Gdx.app.exit();
+                    }
+                }
+            } else {
+                if (!scenes.get(currentScene).getClass().equals(FinalScene.class))
+                    currentScene++;
+                else
+                    Gdx.app.exit();
             }
         }
 
-    }
+	}
 
 	@Override
 	public void pause() {

@@ -10,7 +10,9 @@ public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		int numberGame = getIntent().getExtras().getInt("GAME");
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new Prototype(), config);
+		initialize(new Prototype(numberGame), config);
 	}
 }
