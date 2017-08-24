@@ -11,12 +11,12 @@ public class Click {
     Texture image;
     int x, y, length, width;
 
-    public Click(Texture image) {//, int x, int y, int length, int width) {
+    public Click(Texture image) { //, int x, int y, int length, int width) {
         this.image = image;
-        this.x = x;
-        this.y = y;
-        this.length = length;
-        this.width = width;
+//        this.x = x;
+//        this.y = y;
+//        this.length = length;
+//        this.width = width;
     }
 
     public Texture getImage() {

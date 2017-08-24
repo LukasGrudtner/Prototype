@@ -1,6 +1,8 @@
 package components;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import java.util.ArrayList;
 
 /**
  * Created by Lukas on 21/08/2017.
@@ -8,21 +10,27 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class InitialScene extends Scene {
 
-    private int next;
+    private Scene nextScene;
 
-    public InitialScene(int index, Texture background, String text, int next, Click click) {
-        this.index = index;
-        this.background = background;
-        this.text = text;
-        this.next = next;
-        this.click = click;
+    public InitialScene(Texture background, String text, ArrayList<Sprite> imageList, Click click) {
+        super(background, text, imageList, click);
     }
 
-    public int getNext() {
-        return next;
+    public Scene getNextScene() {
+        return nextScene;
     }
 
-    public void setNext(int next) {
-        this.next = next;
+    public void setNextScene(Scene nextScene) {
+        this.nextScene = nextScene;
+    }
+
+    @Override
+    public void toNext() {
+        prototype.setCurrentScene(nextScene);
+    }
+
+    @Override
+    public void toPrevious() {
+
     }
 }

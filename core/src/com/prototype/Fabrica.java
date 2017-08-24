@@ -59,65 +59,66 @@ public class Fabrica {
         return scenes;
     }
 
-    public ArrayList<Scene> getScenesGame(int numberGame) {
+    public InitialScene getInitialScene(int numberGame) {
 
-        ArrayList<Scene> scenes = new ArrayList<Scene>();
+        InitialScene initialScene = new InitialScene(null, null, null, null);
 
         if (numberGame == 1) {
-            Click clickObject = new Click(new Texture(Gdx.files.internal("seta.png")));
+            Click clickObject = new Click(new Texture(Gdx.files.internal("seta.png")) );
 
             Texture background = new Texture(Gdx.files.internal("fundo.png"));
-            Texture background2 = new Texture(Gdx.files.internal("fundo2.png"));
-            Texture background3 = new Texture(Gdx.files.internal("fundo3.png"));
-            Texture background4 = new Texture(Gdx.files.internal("fundo.png"));
 
-            Scene scene1 = new InitialScene(0, background, "Finalmente chegou o dia de ir ao dentista!", 2, null);
-            Scene scene2 = new IntermediateScene(1, background2, "E por isto este roteiro irá me ajudar a entender e aprender tudo o que é preciso para tornar este dia muito especial!", 1, 3, null);
-            Scene scene3 = new IntermediateScene(2, background3, "Quando você estiver pronto, aperte na seta para iniciarmos nossa jornada!", 2, 4, clickObject);
-            Scene scene4 = new FinalScene(3, background, "Aperte na seta para finalizar!", 3, clickObject);
+            initialScene = new InitialScene(background, "Cena inicial", null, clickObject);
+            IntermediateScene scene2 = new IntermediateScene(background, "Cena 2", null, clickObject);
+            IntermediateScene scene3 = new IntermediateScene(background, "Cena 3", null, clickObject);
+            FinalScene finalScene = new FinalScene(background, "Cena final", null, clickObject);
 
-            scenes.add(scene1);
-            scenes.add(scene2);
-            scenes.add(scene3);
-            scenes.add(scene4);
+            initialScene.setNextScene(scene2);
+            scene2.setPreviousScene(initialScene);
+            scene2.setNextScene(scene3);
+            scene3.setPreviousScene(scene2);
+            scene3.setNextScene(finalScene);
+            finalScene.setPreviousScene(scene3);
         }
 
         if (numberGame == 2) {
+            Click clickObject = new Click(new Texture(Gdx.files.internal("seta.png")) );
 
-            Texture background = new Texture(Gdx.files.internal("fundo3.png"));
             Texture background2 = new Texture(Gdx.files.internal("fundo2.png"));
-            Texture background3 = new Texture(Gdx.files.internal("fundo3.png"));
 
-            Scene scene1 = new InitialScene(0, background3, "Segundo jogo!", 2, null);
-            Scene scene2 = new IntermediateScene(1, background3, "Tela 2 do segundo jogo, clique para continuar", 1, 3, null);
-            Scene scene3 = new FinalScene(2, background2, "Última tela! Clique para finalizar", 2, null);
+            initialScene = new InitialScene(background2, "Cena inicial", null, clickObject);
+            IntermediateScene scene2 = new IntermediateScene(background2, "Cena 2", null, clickObject);
+            IntermediateScene scene3 = new IntermediateScene(background2, "Cena 3", null, clickObject);
+            FinalScene finalScene = new FinalScene(background2, "Cena final", null, clickObject);
 
-            scenes.add(scene1);
-            scenes.add(scene2);
-            scenes.add(scene3);
+            initialScene.setNextScene(scene2);
+            scene2.setPreviousScene(initialScene);
+            scene2.setNextScene(scene3);
+            scene3.setPreviousScene(scene2);
+            scene3.setNextScene(finalScene);
+            finalScene.setPreviousScene(scene3);
         }
 
         if (numberGame == 3) {
+            Click clickObject = new Click(new Texture(Gdx.files.internal("seta.png")) );
 
-            Click clickObject = new Click(new Texture(Gdx.files.internal("seta.png")));
-            Texture background = new Texture(Gdx.files.internal("fundo3.png"));
-            Texture background2 = new Texture(Gdx.files.internal("fundo2.png"));
             Texture background3 = new Texture(Gdx.files.internal("fundo3.png"));
 
-            Scene scene1 = new InitialScene(0, background, "1", 2, clickObject);
-            Scene scene2 = new IntermediateScene(1, background, "2", 1, 3, clickObject);
-            Scene scene3 = new IntermediateScene(1, background, "3", 2, 4, null);
-            Scene scene4 = new IntermediateScene(1, background, "4", 3, 5, clickObject);
-            Scene scene5 = new FinalScene(2, background2, "5", 4, clickObject);
+            initialScene = new InitialScene(background3, "Cena inicial", null, clickObject);
+            IntermediateScene scene2 = new IntermediateScene(background3, "Cena 2", null, clickObject);
+            IntermediateScene scene3 = new IntermediateScene(background3, "Cena 3", null, clickObject);
+            FinalScene finalScene = new FinalScene(background3, "Cena final", null, clickObject);
 
-            scenes.add(scene1);
-            scenes.add(scene2);
-            scenes.add(scene3);
-            scenes.add(scene4);
-            scenes.add(scene5);
+            initialScene.setNextScene(scene2);
+            scene2.setPreviousScene(initialScene);
+            scene2.setNextScene(scene3);
+            scene3.setPreviousScene(scene2);
+            scene3.setNextScene(finalScene);
+            finalScene.setPreviousScene(scene3);
         }
 
-        return scenes;
+
+        return initialScene;
     }
 
 }
