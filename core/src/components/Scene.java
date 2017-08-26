@@ -23,13 +23,13 @@ public abstract class Scene {
     protected Texture background;
     protected String text;
     protected ArrayList<Sprite> imageList;
-    protected Click click;
+    protected Transition transition;
 
-    public Scene(Texture background, String text, ArrayList<Sprite> imageList, Click click) {
+    public Scene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
         this.background = background;
         this.text = text;
         this.imageList = imageList;
-        this.click = click;
+        this.transition = transition;
     }
 
     public ArrayList<Sprite> getImageList() {
@@ -56,15 +56,15 @@ public abstract class Scene {
         this.text = text;
     }
 
-    public Click getClick() {
-        return click;
+    public Transition getTransition() {
+        return transition;
     }
 
-    public void setClick(Click click) {
-        this.click = click;
+    public void setTransition(Transition transition) {
+        this.transition = transition;
     }
 
-    public void show(Prototype prototype, Batch batch, GlyphLayout layout, BitmapFont font, Rectangle rectangle, Sprite seta) {
+    public void show(Prototype prototype, Batch batch, GlyphLayout layout, BitmapFont font, Rectangle rectangle, Texture textureTransition) {
         this.prototype = prototype;
 
         batch.begin();
@@ -72,21 +72,20 @@ public abstract class Scene {
         layout.setText(font, text, Color.BLACK, 300, Align.center, true);
         font.draw(batch, layout, 100, 300);
 
-        if (click != null) {
-            rectangle.set(Gdx.graphics.getWidth() - 250, 50, 200, 125);
-            seta.setSize(200, 125);
-            seta.setPosition(Gdx.graphics.getWidth() - 250, 50);
-            seta.draw(batch);
+        if (transition != null) {
+            rectangle.set(transition.getX(), transition.getY(), transition.getWidth(), transition.getHeight());
+            textureTransition = transition.getSprite().getTexture();
+            batch.draw(textureTransition, transition.getX(), transition.getY(), transition.getWidth(), transition.getHeight());
         }
 
         batch.end();
 
-        this.handlesClick(rectangle);
+        this.handleTransition(rectangle);
     }
 
-    public void handlesClick(Rectangle rectangle) {
+    public void handleTransition(Rectangle rectangle) {
         if (Gdx.input.justTouched()) {
-            if (click != null) {
+            if (transition != null) {
                 int x = Gdx.input.getX();
                 int y = Gdx.input.getY();
 

@@ -3,48 +3,88 @@ InitialScene
 fundo2.png
 tela inicial
 seta.png
+100
+100
+100
+100
 
 IntermediateScene
 fundo2.png
 tela intermediária 1
 seta.png
+100
+100
+100
+100
 
 IntermediateScene
 fundo2.png
 tela intermediária 2
 seta.png
+100
+100
+100
+100
 
 IntermediateScene
 fundo2.png
 tela intermediária 3
 seta.png
+100
+100
+100
+100
 
 IntermediateScene
 fundo2.png
 tela intermediária 4
 seta.png
+100
+100
+100
+100
 
 IntermediateScene
 fundo2.png
 tela intermediária 5
 seta.png
+100
+100
+100
+100
 
 IntermediateScene
 fundo2.png
 tela intermediária 6
 seta.png
+100
+100
+100
+100
 
 IntermediateScene
 fundo2.png
 tela intermediária 7
 seta.png
+100
+100
+100
+100
 
 IntermediateScene
 fundo2.png
 tela intermediária 8
 seta.png
+100
+100
+100
+100
 
 FinalScene
 fundo2.png
 tela final
 seta.png
+100
+100
+100
+100

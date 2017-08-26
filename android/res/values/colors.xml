@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_button">#0079c9</color>
+    <color name="color_background">#2299e7</color>
+    <color name="color_text">#ffffff</color>
+
+    <color name="color_botao_pressionado">#008ae6</color>
+</resources>

@@ -12,8 +12,8 @@ public class FinalScene extends Scene {
 
     private Scene previousScene;
 
-    public FinalScene(Texture background, String text, ArrayList<Sprite> imageList, Click click) {
-        super(background, text, imageList, click);
+    public FinalScene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
+        super(background, text, imageList, transition);
     }
 
     public Scene getPreviousScene() {

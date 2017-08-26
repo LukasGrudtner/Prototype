@@ -6,14 +6,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.prototype.MainActivity"
-    android:background="@android:color/holo_blue_dark">
+    android:background="@color/color_background">
 
 
     <TextView
         android:text="Selecione um jogo:"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:textColor="@color/color_text"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:layout_marginTop="24dp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,25 +32,40 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:text="Game 1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:textColor="@color/color_text"
+                android:layout_margin="6dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:text="Game 1" />
 
             <Button
                 android:text="Game 2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button2"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:textColor="@color/color_text"
+                android:layout_margin="6dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp" />
 
             <Button
                 android:text="Game 3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button3"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:textColor="@color/color_text"
+                android:layout_margin="6dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp" />
 
         </LinearLayout>
 
@@ -59,21 +79,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button4"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:textColor="@color/color_text"
+                android:layout_margin="6dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp" />
 
             <Button
                 android:text="Game 5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button5"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:textColor="@color/color_text"
+                android:layout_margin="6dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp" />
 
             <Button
                 android:text="Game 6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button6"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:textColor="@color/color_text"
+                android:layout_margin="6dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp" />
         </LinearLayout>
 
     </LinearLayout>

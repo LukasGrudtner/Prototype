@@ -3,8 +3,16 @@ InitialScene
 fundo3.png
 tela inicial
 seta.png
+100
+100
+100
+100
 
 FinalScene
 fundo3.png
 tela final
 seta.png
+100
+100
+150
+150

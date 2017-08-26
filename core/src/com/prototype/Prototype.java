@@ -23,7 +23,8 @@ public class Prototype implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
     private GlyphLayout layout;
-    private Sprite seta;
+    private Texture textureTransition;
+    private Texture textureMoveOn, textureGoBack;
     private Rectangle rectangle;
 
     private Factory factory;
@@ -49,8 +50,6 @@ public class Prototype implements ApplicationListener {
         layout = new GlyphLayout();
 
         batch = new SpriteBatch();
-
-        seta = new Sprite(new Texture(Gdx.files.internal("seta.png")));
 
         font = new BitmapFont();
         font.getData().setScale(3);
@@ -82,7 +81,7 @@ public class Prototype implements ApplicationListener {
         batch.setProjectionMatrix(camera.combined);
 
         // Chama o método para renderizar o batch
-        currentScene.show(this, batch, layout, font, rectangle, seta);
+        currentScene.show(this, batch, layout, font, rectangle, textureTransition);
 
 	}
 

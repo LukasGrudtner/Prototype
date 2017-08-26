@@ -3,6 +3,8 @@ package components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ public class Reader {
         String type = "";
         String background = "";
         String text = "";
-        String clickImage = "";
+        String transitionImage = "";
+        int transitionX, transitionY, transitionWidth, transitionHeight;
 
         FileHandle fileHandle = Gdx.files.internal(path);
         java.io.Reader reader = fileHandle.reader();
@@ -38,30 +41,37 @@ public class Reader {
                 type = bufferedReader.readLine();
                 background = bufferedReader.readLine();
                 text = bufferedReader.readLine();
-                clickImage = bufferedReader.readLine();
+                transitionImage = bufferedReader.readLine();
+                transitionX = Integer.parseInt(bufferedReader.readLine());
+                transitionY = Integer.parseInt(bufferedReader.readLine());
+                transitionWidth = Integer.parseInt(bufferedReader.readLine());
+                transitionHeight = Integer.parseInt(bufferedReader.readLine());
 
                 if (type.equals("InitialScene")) {
                     Texture textureBackground = new Texture(Gdx.files.internal(background));
-                    Texture textureClick = new Texture(Gdx.files.internal(clickImage));
-                    Click click = new Click(textureClick);
+                    Texture textureTransition = new Texture(Gdx.files.internal(transitionImage));
+                    Sprite spriteTransition = new Sprite(textureTransition, transitionX, transitionY, transitionWidth, transitionHeight);
+                    Transition transition = new Transition(spriteTransition);
 
-                    scene = new InitialScene(textureBackground, text, null, click);
+                    scene = new InitialScene(textureBackground, text, null, transition);
                 }
 
                 if (type.equals("IntermediateScene")) {
                     Texture textureBackground = new Texture(Gdx.files.internal(background));
-                    Texture textureClick = new Texture(Gdx.files.internal(clickImage));
-                    Click click = new Click(textureClick);
+                    Texture textureTransition = new Texture(Gdx.files.internal(transitionImage));
+                    Sprite spriteTransition = new Sprite(textureTransition, transitionX, transitionY, transitionWidth, transitionHeight);
+                    Transition transition = new Transition(spriteTransition);
 
-                    scene = new IntermediateScene(textureBackground, text, null, click);
+                    scene = new IntermediateScene(textureBackground, text, null, transition);
                 }
 
                 if (type.equals("FinalScene")) {
                     Texture textureBackground = new Texture(Gdx.files.internal(background));
-                    Texture textureClick = new Texture(Gdx.files.internal(clickImage));
-                    Click click = new Click(textureClick);
+                    Texture textureTransition = new Texture(Gdx.files.internal(transitionImage));
+                    Sprite spriteTransition = new Sprite(textureTransition, transitionX, transitionY, transitionWidth, transitionHeight);
+                    Transition transition = new Transition(spriteTransition);
 
-                    scene = new FinalScene(textureBackground, text, null, click);
+                    scene = new FinalScene(textureBackground, text, null, transition);
                 }
 
                 scenes.add(scene);

@@ -12,8 +12,8 @@ public class InitialScene extends Scene {
 
     private Scene nextScene;
 
-    public InitialScene(Texture background, String text, ArrayList<Sprite> imageList, Click click) {
-        super(background, text, imageList, click);
+    public InitialScene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
+        super(background, text, imageList, transition);
     }
 
     public Scene getNextScene() {
