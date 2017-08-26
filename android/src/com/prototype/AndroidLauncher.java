@@ -11,8 +11,8 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		int numberGame = getIntent().getExtras().getInt("GAME");
+		String path = getIntent().getExtras().getString("GAME");
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new Prototype(numberGame), config);
+		initialize(new Prototype(path), config);
 	}
 }

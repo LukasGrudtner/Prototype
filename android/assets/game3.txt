@@ -1,0 +1,10 @@
+2
+InitialScene
+fundo3.png
+tela inicial
+seta.png
+
+FinalScene
+fundo3.png
+tela final
+seta.png

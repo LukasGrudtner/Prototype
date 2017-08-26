@@ -1,0 +1,17 @@
+3
+InitialScene
+fundo.png
+tela inicial
+seta.png
+
+IntermediateScene
+fundo.png
+tela intermediária
+seta.png
+
+FinalScene
+fundo.png
+tela final
+seta.png
+
+

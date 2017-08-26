@@ -2,7 +2,6 @@ package com.prototype;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,15 +10,9 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.ArrayList;
-
-import components.FinalScene;
 import components.Scene;
 
 
@@ -33,8 +26,8 @@ public class Prototype implements ApplicationListener {
     private Sprite seta;
     private Rectangle rectangle;
 
-    private Fabrica fabrica;
-    private int numberGame;
+    private Factory factory;
+    private String path;
 
     // Câmera
     private OrthographicCamera camera;
@@ -42,15 +35,15 @@ public class Prototype implements ApplicationListener {
     private float VIRTUAL_WIDTH = 0;
     private float VIRTUAL_HEIGHT = 0;
 
-    public Prototype(int numberGame) {
-        this.numberGame = numberGame;
+    public Prototype(String path) {
+        this.path = path;
     }
 
 	@Override
 	public void create() {
 
-        fabrica = new Fabrica();
-        currentScene = fabrica.getInitialScene(numberGame);
+        factory = new Factory();
+        currentScene = factory.getInitialScene(path);
 
         rectangle = new Rectangle();
         layout = new GlyphLayout();

@@ -15,7 +15,6 @@ import static com.prototype.R.id.button2;
 public class MainActivity extends Activity {
 
     private Button button1, button2, button3;
-    private static final String ARQUIVO_PREFERENCIAS = "ArquivoPreferencia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class MainActivity extends Activity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initGame(1);
+                initGame("game1.txt");
             }
         });
 
@@ -34,7 +33,7 @@ public class MainActivity extends Activity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initGame(2);
+                initGame("game2.txt");
             }
         });
 
@@ -42,23 +41,14 @@ public class MainActivity extends Activity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initGame(3);
+                initGame("game3.txt");
             }
         });
-
     }
 
-    private void saveNumberGame(int number) {
-        SharedPreferences sharedPreferences = getSharedPreferences(ARQUIVO_PREFERENCIAS, 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        editor.putInt("GAME", number);
-        editor.commit();
-    }
-
-    private void initGame(int numberGame) {
+    private void initGame(String path) {
         Intent intent = new Intent(MainActivity.this, AndroidLauncher.class);
-        intent.putExtra("GAME", numberGame);
+        intent.putExtra("GAME", path);
         startActivity(intent);
     }
 
