@@ -22,6 +22,7 @@ public class Reader {
     }
 
     public InitialScene getInitialScene() {
+
         ArrayList<Scene> scenes = new ArrayList<Scene>();
         String type = "";
         String background = "";
