@@ -14,6 +14,9 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.graphics.Color;
 
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import static com.prototype.R.id.button2;
 
 public class MainActivity extends Activity {
@@ -24,6 +27,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        JSONParser parser = new JSONParser();
 
         button1 = (Button) findViewById(R.id.button);
         button1.setOnClickListener(new View.OnClickListener() {

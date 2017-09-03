@@ -44,7 +44,6 @@ public class Prototype implements ApplicationListener {
 	public void create() {
 
         factory = new Factory();
-        factory.createJSON();
         currentScene = factory.getInitialScene(path);
 
         rectangle = new Rectangle();
