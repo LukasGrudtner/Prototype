@@ -10,5 +10,5 @@ clicando com o botão direito sobre ele, é selecionada a opção 'Add as librar
 do módulo core.
 
 ## Links
-[Github](https://github.com/fangyidong/json-simple)
-[JAR](https://code.google.com/archive/p/json-simple/)
+- [Github](https://github.com/fangyidong/json-simple)
+- [JAR](https://code.google.com/archive/p/json-simple/)
