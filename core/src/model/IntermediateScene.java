@@ -1,4 +1,4 @@
-package components;
+package model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -8,12 +8,21 @@ import java.util.ArrayList;
  * Created by Lukas on 21/08/2017.
  */
 
-public class InitialScene extends Scene {
+public class IntermediateScene extends Scene {
 
+    private Scene previousScene;
     private Scene nextScene;
 
-    public InitialScene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
+    public IntermediateScene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
         super(background, text, imageList, transition);
+    }
+
+    public Scene getPreviousScene() {
+        return previousScene;
+    }
+
+    public void setPreviousScene(Scene previousScene) {
+        this.previousScene = previousScene;
     }
 
     public Scene getNextScene() {
@@ -31,6 +40,6 @@ public class InitialScene extends Scene {
 
     @Override
     public void toPrevious() {
-
+        prototype.setCurrentScene(previousScene);
     }
 }

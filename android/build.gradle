@@ -124,4 +124,5 @@ idea {
 }
 dependencies {
     compile files('libs/json/json-simple-1.1.1.jar')
+    compile files('libs/gson_android/gson-2.8.1-sources.jar')
 }

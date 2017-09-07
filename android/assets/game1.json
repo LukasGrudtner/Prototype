@@ -1,0 +1,4 @@
+{"numberOfScenes":3}
+{"backgroundPath":"fundo.png","transitionImageWidth":100,"transitionImageX":100,"sceneType":"InitialScene","transitionImageY":100,"imagePath":"fundo.png","text":"tela inicial","transitionImageHeight":100}
+{"backgroundPath":"fundo2.png","transitionImageWidth":100,"transitionImageX":100,"sceneType":"IntermediateScene","transitionImageY":100,"imagePath":"fundo.png","text":"tela intermediária","transitionImageHeight":100}
+{"backgroundPath":"fundo.png","transitionImageWidth":100,"transitionImageX":200,"sceneType":"FinalScene","transitionImageY":100,"imagePath":"fundo3.png","text":"tela final","transitionImageHeight":100}

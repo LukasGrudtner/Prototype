@@ -6,5 +6,6 @@ eclipse.project {
     name = appName + "-core"
 }
 dependencies {
+    compile 'com.google.code.gson:gson:2.8.0'
     compile files('C:/Users/Lukas/Github/prototype/lib/json-simple-1.1.1.jar')
 }

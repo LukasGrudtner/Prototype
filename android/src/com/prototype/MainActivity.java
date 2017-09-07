@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initGame("game1.txt");
+                initGame("game1.json");
             }
         });
 
