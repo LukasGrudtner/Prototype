@@ -2,16 +2,16 @@ package model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -20,16 +20,6 @@ import java.util.ArrayList;
 
 public class SceneReaderJSON {
 
-    private static final String NUMBER_OF_SCENES = "numberOfScenes";
-    private static final String SCENE_TYPE = "sceneType";
-    private static final String BACKGROUND_PATH = "backgroundPath";
-    private static final String TEXT = "text";
-    private static final String TRANSITION_IMAGE = "transitionImage";
-    private static final String TRANSITION_IMAGE_X = "transitionImageX";
-    private static final String TRANSITION_IMAGE_Y = "transitionImageY";
-    private static final String TRANSITION_IMAGE_WIDTH = "transitionImageWidth";
-    private static final String TRANSITION_IMAGE_HEIGHT = "transitionImageHeight";
-
     private String filePath;
 
     public SceneReaderJSON(String path) {
@@ -37,65 +27,59 @@ public class SceneReaderJSON {
     }
 
     public Scene getInitialScene() {
-        ArrayList<Scene> sceneList = new ArrayList<Scene>();
-        JSONObject jsonObject;
-        JSONParser jsonParser = new JSONParser();
-
-
-        FileHandle fileHandle = Gdx.files.internal(filePath);
-        Reader reader = fileHandle.reader();
-        BufferedReader bufferedReader = new BufferedReader(reader);
-
-        try {
-            jsonObject = (JSONObject) jsonParser.parse(bufferedReader.readLine());
-            int numberOfScenes = Integer.parseInt(jsonObject.get(NUMBER_OF_SCENES).toString());
-
-            for (int i = 0; i < numberOfScenes; i++) {
-                String jsonString = bufferedReader.readLine();
-
-                jsonObject = (JSONObject) jsonParser.parse(jsonString);
-
-                String sceneType = (String) jsonObject.get(SCENE_TYPE);
-                String backgroundPath = (String) jsonObject.get(BACKGROUND_PATH);
-                String text = (String) jsonObject.get(TEXT);
-                String imagePath = (String) jsonObject.get(TRANSITION_IMAGE);
-                int x = Integer.parseInt(jsonObject.get(TRANSITION_IMAGE_X).toString());
-                int y = Integer.parseInt(jsonObject.get(TRANSITION_IMAGE_Y).toString());
-                int width = Integer.parseInt(jsonObject.get(TRANSITION_IMAGE_WIDTH).toString());
-                int height = Integer.parseInt(jsonObject.get(TRANSITION_IMAGE_HEIGHT).toString());
-
-                Scene scene = createScene(sceneType, backgroundPath, text, imagePath, x, y, width, height);
-                sceneList.add(scene);
-            }
-
-            bufferedReader.close();
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        ArrayList<Scene> sceneList = createScenes(readSerializableScenes());
         return setOrder(sceneList).get(0);
     }
 
-    private Scene createScene(String sceneType, String backgroundPath, String text, String transitionImage,
-                              int transitionX, int transitionY, int transitionWidth, int transitionHeight) {
-        Scene scene = null;
-        Texture textureBackground = new Texture(Gdx.files.internal(backgroundPath));
-        Texture textureTransition = new Texture(Gdx.files.internal(transitionImage));
-        Sprite spriteTransition = new Sprite(textureTransition, transitionX, transitionY, transitionWidth, transitionHeight);
-        Transition transition = new Transition(spriteTransition);
+    private ArrayList<SerializableScene> readSerializableScenes() {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<SerializableScene>>() {}.getType();
+        String stringJson = "";
 
-        if (sceneType.equals(InitialScene.class.getSimpleName()))
-            scene = new InitialScene(textureBackground, text, null, transition);
-        else if (sceneType.equals(IntermediateScene.class.getSimpleName()))
-            scene = new IntermediateScene(textureBackground, text, null, transition);
-        else if (sceneType.equals(FinalScene.class.getSimpleName()))
-            scene = new FinalScene(textureBackground, text, null, transition);
+        try {
+            FileHandle fileHandle = Gdx.files.internal(filePath);
+            Reader reader = fileHandle.reader();
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            stringJson = bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        return scene;
+        return gson.fromJson(stringJson, type);
+    }
+
+    private ArrayList<Scene> createScenes(ArrayList<SerializableScene> serializableSceneList) {
+        ArrayList<Scene> sceneList = new ArrayList<Scene>();
+
+        for (SerializableScene serializableScene : serializableSceneList) {
+            Scene scene = null;
+            Texture textureBackground = new Texture(Gdx.files.internal(serializableScene.getBackgroundPath()));
+            Texture textureTransition = new Texture(Gdx.files.internal(serializableScene.getTransitionImagePath()));
+            Sprite spriteTransition = new Sprite(textureTransition, serializableScene.getTransitionImageX(),
+                    serializableScene.getTransitionImageY(), serializableScene.getTransitionImageWidth(),
+                    serializableScene.getTransitionImageHeight());
+            Transition transition = new Transition(spriteTransition);
+            Text text = new Text();
+            text.setText(serializableScene.getText());
+            text.setColor(new Color(serializableScene.getTextColorRed(), serializableScene.getTextColorGreen(),
+                    serializableScene.getTextColorBlue(), serializableScene.getTextColorAlpha()));
+            text.setSize(serializableScene.getFontSize());
+            text.setX(serializableScene.getTextX());
+            text.setY(serializableScene.getTextY());
+            text.setWidth(serializableScene.getTextWidth());
+            text.setHeight(serializableScene.getTextHeight());
+
+            if (serializableScene.getSceneType().equals(InitialScene.class.getSimpleName()))
+                scene = new InitialScene(textureBackground, text, null, transition);
+            else if (serializableScene.getSceneType().equals(IntermediateScene.class.getSimpleName()))
+                scene = new IntermediateScene(textureBackground, text, null, transition);
+            else if (serializableScene.getSceneType().equals(FinalScene.class.getSimpleName()))
+                scene = new FinalScene(textureBackground, text, null, transition);
+
+            sceneList.add(scene);
+        }
+
+        return sceneList;
     }
 
     private ArrayList<Scene> setOrder(ArrayList<Scene> scenes) {

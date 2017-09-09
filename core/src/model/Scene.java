@@ -21,11 +21,11 @@ public abstract class Scene {
 
     protected Prototype prototype;
     protected Texture background;
-    protected String text;
+    protected Text text;
     protected ArrayList<Sprite> imageList;
     protected Transition transition;
 
-    public Scene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
+    public Scene(Texture background, Text text, ArrayList<Sprite> imageList, Transition transition) {
         this.background = background;
         this.text = text;
         this.imageList = imageList;
@@ -48,11 +48,11 @@ public abstract class Scene {
         this.background = background;
     }
 
-    public String getText() {
+    public Text getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(Text text) {
         this.text = text;
     }
 
@@ -69,8 +69,8 @@ public abstract class Scene {
 
         batch.begin();
         batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        layout.setText(font, text, Color.BLACK, 300, Align.center, true);
-        font.draw(batch, layout, 100, 300);
+        layout.setText(font, text.getText(), text.getColor(), text.getWidth(), Align.center, true);
+        font.draw(batch, layout, text.getX(), text.getY());
 
         if (transition != null) {
             rectangle.set(transition.getX(), transition.getY(), transition.getWidth(), transition.getHeight());

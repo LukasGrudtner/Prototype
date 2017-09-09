@@ -12,7 +12,7 @@ public class InitialScene extends Scene {
 
     private Scene nextScene;
 
-    public InitialScene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
+    public InitialScene(Texture background, Text text, ArrayList<Sprite> imageList, Transition transition) {
         super(background, text, imageList, transition);
     }
 

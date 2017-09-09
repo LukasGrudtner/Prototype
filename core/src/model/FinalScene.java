@@ -12,7 +12,7 @@ public class FinalScene extends Scene {
 
     private Scene previousScene;
 
-    public FinalScene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
+    public FinalScene(Texture background, Text text, ArrayList<Sprite> imageList, Transition transition) {
         super(background, text, imageList, transition);
     }
 

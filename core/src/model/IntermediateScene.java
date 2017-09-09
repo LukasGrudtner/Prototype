@@ -13,7 +13,7 @@ public class IntermediateScene extends Scene {
     private Scene previousScene;
     private Scene nextScene;
 
-    public IntermediateScene(Texture background, String text, ArrayList<Sprite> imageList, Transition transition) {
+    public IntermediateScene(Texture background, Text text, ArrayList<Sprite> imageList, Transition transition) {
         super(background, text, imageList, transition);
     }
 
