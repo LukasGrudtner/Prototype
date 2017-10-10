@@ -71,11 +71,6 @@ public class SceneReaderJSON {
             text.setText(serializableScene.getText());
             text.setColor(new Color(serializableScene.getTextColorRed(), serializableScene.getTextColorGreen(),
                     serializableScene.getTextColorBlue(), serializableScene.getTextColorAlpha()));
-            text.setSize(serializableScene.getFontSize());
-            text.setX(serializableScene.getTextX());
-            text.setY(serializableScene.getTextY());
-            text.setWidth(serializableScene.getTextWidth());
-            text.setHeight(serializableScene.getTextHeight());
 
             if (serializableScene.getSceneType().equals(InitialScene.class.getSimpleName()))
                 scene = new InitialScene(textureBackground, text, null, transition);

@@ -1,5 +1,6 @@
 package model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 /**
@@ -10,7 +11,6 @@ public class Text {
 
     private String text = "";
     private Color color;
-    private int size = 0, x = 0, y = 0, width = 0, height = 0;
 
     public String getText() {
         return text;
@@ -29,42 +29,20 @@ public class Text {
     }
 
     public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
+        /* Retira 1/10 do tamanho da tela de cada lado do texto. */
+        int maxSize = Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()/5);
+        return maxSize;
     }
 
     public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
+        int margin = Gdx.graphics.getWidth() - this.getSize();
+        return margin/2;
     }
 
     public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+        /* Define o número de linhas do texto. */
+        int extraLines = text.length()/50;
+        int height = Gdx.graphics.getHeight();
+        return extraLines*height/32 + height/8;
     }
 }

@@ -74,7 +74,7 @@ public abstract class Scene {
 
         batch.begin();
         batch.draw(background, 0, 0, width, height);
-        layout.setText(font, text.getText(), text.getColor(), text.getWidth(), Align.center, true);
+        layout.setText(font, text.getText(), text.getColor(), text.getSize(), Align.center, true);
         font.draw(batch, layout, text.getX(), text.getY());
 
         /* Desenha texturas para os botões de transição da cena, definidos na classe
