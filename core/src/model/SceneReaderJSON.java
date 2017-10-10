@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -13,6 +12,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import model.scenes.InitialScene;
+import model.scenes.IntermediateScene;
 
 /**
  * Created by lukas on 25/08/2017.
@@ -54,30 +56,20 @@ public class SceneReaderJSON {
         for (SerializableScene serializableScene : serializableSceneList) {
             Scene scene = null;
             Texture textureBackground = new Texture(Gdx.files.internal(serializableScene.getBackgroundPath()));
-            Texture textureTransition = null;
-            Sprite spriteTransition = null;
 
-            /***********/
-            Transition transition = null;
-//            if (serializableScene.getTextHeight() != 0) {
-//                textureTransition = new Texture(Gdx.files.internal(serializableScene.getTransitionImagePath()));
-//                spriteTransition = new Sprite(textureTransition, serializableScene.getTransitionImageX(),
-//                        serializableScene.getTransitionImageY(), serializableScene.getTransitionImageWidth(),
-//                        serializableScene.getTransitionImageHeight());
-//                transition = new Transition(spriteTransition);
-//            }
-            /***********/
+            /* Define o texto. */
             Text text = new Text();
             text.setText(serializableScene.getText());
             text.setColor(new Color(serializableScene.getTextColorRed(), serializableScene.getTextColorGreen(),
                     serializableScene.getTextColorBlue(), serializableScene.getTextColorAlpha()));
 
-            if (serializableScene.getSceneType().equals(InitialScene.class.getSimpleName()))
-                scene = new InitialScene(textureBackground, text, null, transition);
-            else if (serializableScene.getSceneType().equals(IntermediateScene.class.getSimpleName()))
-                scene = new IntermediateScene(textureBackground, text, null, transition);
-            else if (serializableScene.getSceneType().equals(FinalScene.class.getSimpleName()))
-                scene = new FinalScene(textureBackground, text, null, transition);
+            /* Inicializa a cena com base no seu tipo. */
+            if (serializableScene.getSceneType().equals(model.scenes.InitialScene.class.getSimpleName()))
+                scene = new model.scenes.InitialScene(textureBackground, text);
+            else if (serializableScene.getSceneType().equals(model.scenes.IntermediateScene.class.getSimpleName()))
+                scene = new model.scenes.IntermediateScene(textureBackground, text);
+            else if (serializableScene.getSceneType().equals(model.scenes.FinalScene.class.getSimpleName()))
+                scene = new model.scenes.FinalScene(textureBackground, text);
 
             sceneList.add(scene);
         }
@@ -85,14 +77,15 @@ public class SceneReaderJSON {
         return sceneList;
     }
 
+    /* Define a cena anterior e sucessora de cada cena na lista. */
     private ArrayList<Scene> setOrder(ArrayList<Scene> scenes) {
         for (int i = 0; i < scenes.size(); i++) {
             if (i == 0)
                 ((InitialScene) scenes.get(i)).setNextScene(scenes.get(i+1));
             else if (i == scenes.size()-1)
-                ((FinalScene) scenes.get(i)).setPreviousScene(scenes.get(i-1));
+                ((model.scenes.FinalScene) scenes.get(i)).setPreviousScene(scenes.get(i-1));
             else {
-                ((IntermediateScene) scenes.get(i)).setNextScene(scenes.get(i+1));
+                ((model.scenes.IntermediateScene) scenes.get(i)).setNextScene(scenes.get(i+1));
                 ((IntermediateScene) scenes.get(i)).setPreviousScene(scenes.get(i-1));
             }
         }

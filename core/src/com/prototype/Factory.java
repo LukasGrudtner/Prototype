@@ -1,6 +1,6 @@
 package com.prototype;
 
-import model.InitialScene;
+import model.scenes.InitialScene;
 import model.SceneReaderJSON;
 
 /**

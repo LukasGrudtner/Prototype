@@ -1,8 +1,11 @@
-package model;
+package model.scenes;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import java.util.ArrayList;
+
+import model.Scene;
+import model.Text;
 
 /**
  * Created by Lukas on 21/08/2017.
@@ -13,20 +16,12 @@ public class IntermediateScene extends Scene {
     private Scene previousScene;
     private Scene nextScene;
 
-    public IntermediateScene(Texture background, Text text, ArrayList<Sprite> imageList, Transition transition) {
-        super(background, text, imageList, transition);
-    }
-
-    public Scene getPreviousScene() {
-        return previousScene;
+    public IntermediateScene(Texture background, Text text) {
+        super(background, text);
     }
 
     public void setPreviousScene(Scene previousScene) {
         this.previousScene = previousScene;
-    }
-
-    public Scene getNextScene() {
-        return nextScene;
     }
 
     public void setNextScene(Scene nextScene) {

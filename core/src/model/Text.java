@@ -40,7 +40,7 @@ public class Text {
     }
 
     public int getY() {
-        /* Define o número de linhas do texto. */
+        /* Define o número de linhas do texto, para ajustar a altura do texto na tela. */
         int extraLines = text.length()/50;
         int height = Gdx.graphics.getHeight();
         return extraLines*height/32 + height/8;

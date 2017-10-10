@@ -22,48 +22,12 @@ public abstract class Scene {
     protected Prototype prototype;
     protected Texture background;
     protected Text text;
-    protected ArrayList<Sprite> imageList;
-    protected Transition transition;
     private TransitionButtons transitionButtons;
 
-    public Scene(Texture background, Text text, ArrayList<Sprite> imageList, Transition transition) {
+    public Scene(Texture background, Text text) {
         this.background = background;
         this.text = text;
-        this.imageList = imageList;
-        this.transition = transition;
         transitionButtons = new TransitionButtons();
-    }
-
-    public ArrayList<Sprite> getImageList() {
-        return imageList;
-    }
-
-    public void setImageList(ArrayList<Sprite> imageList) {
-        this.imageList = imageList;
-    }
-
-    public Texture getBackground() {
-        return background;
-    }
-
-    public void setBackground(Texture background) {
-        this.background = background;
-    }
-
-    public Text getText() {
-        return text;
-    }
-
-    public void setText(Text text) {
-        this.text = text;
-    }
-
-    public Transition getTransition() {
-        return transition;
-    }
-
-    public void setTransition(Transition transition) {
-        this.transition = transition;
     }
 
     public void show(Prototype prototype, Batch batch, GlyphLayout layout, BitmapFont font) {
