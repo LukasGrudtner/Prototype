@@ -23,8 +23,9 @@ public class Prototype implements ApplicationListener {
     private BitmapFont font;
     private GlyphLayout layout;
     private Texture textureTransition;
-    private Texture textureMoveOn, textureGoBack;
+
     private Rectangle rectangle;
+
 
     private Factory factory;
     private String path;
@@ -34,6 +35,9 @@ public class Prototype implements ApplicationListener {
     private Viewport viewport;
     private float VIRTUAL_WIDTH = 0;
     private float VIRTUAL_HEIGHT = 0;
+
+    // Objetos padrões da tela
+
 
     public Prototype(String path) {
         this.path = path;
@@ -45,7 +49,6 @@ public class Prototype implements ApplicationListener {
         factory = new Factory();
         currentScene = factory.getInitialScene(path);
 
-        rectangle = new Rectangle();
         layout = new GlyphLayout();
 
         batch = new SpriteBatch();
@@ -80,7 +83,7 @@ public class Prototype implements ApplicationListener {
         batch.setProjectionMatrix(camera.combined);
 
         // Chama o método para renderizar o batch
-        currentScene.show(this, batch, layout, font, rectangle, textureTransition);
+        currentScene.show(this, batch, layout, font);
 
 	}
 

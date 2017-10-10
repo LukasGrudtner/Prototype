@@ -54,11 +54,19 @@ public class SceneReaderJSON {
         for (SerializableScene serializableScene : serializableSceneList) {
             Scene scene = null;
             Texture textureBackground = new Texture(Gdx.files.internal(serializableScene.getBackgroundPath()));
-            Texture textureTransition = new Texture(Gdx.files.internal(serializableScene.getTransitionImagePath()));
-            Sprite spriteTransition = new Sprite(textureTransition, serializableScene.getTransitionImageX(),
-                    serializableScene.getTransitionImageY(), serializableScene.getTransitionImageWidth(),
-                    serializableScene.getTransitionImageHeight());
-            Transition transition = new Transition(spriteTransition);
+            Texture textureTransition = null;
+            Sprite spriteTransition = null;
+
+            /***********/
+            Transition transition = null;
+//            if (serializableScene.getTextHeight() != 0) {
+//                textureTransition = new Texture(Gdx.files.internal(serializableScene.getTransitionImagePath()));
+//                spriteTransition = new Sprite(textureTransition, serializableScene.getTransitionImageX(),
+//                        serializableScene.getTransitionImageY(), serializableScene.getTransitionImageWidth(),
+//                        serializableScene.getTransitionImageHeight());
+//                transition = new Transition(spriteTransition);
+//            }
+            /***********/
             Text text = new Text();
             text.setText(serializableScene.getText());
             text.setColor(new Color(serializableScene.getTextColorRed(), serializableScene.getTextColorGreen(),

@@ -24,12 +24,14 @@ public abstract class Scene {
     protected Text text;
     protected ArrayList<Sprite> imageList;
     protected Transition transition;
+    private TransitionButtons transitionButtons;
 
     public Scene(Texture background, Text text, ArrayList<Sprite> imageList, Transition transition) {
         this.background = background;
         this.text = text;
         this.imageList = imageList;
         this.transition = transition;
+        transitionButtons = new TransitionButtons();
     }
 
     public ArrayList<Sprite> getImageList() {
@@ -64,37 +66,37 @@ public abstract class Scene {
         this.transition = transition;
     }
 
-    public void show(Prototype prototype, Batch batch, GlyphLayout layout, BitmapFont font, Rectangle rectangle, Texture textureTransition) {
+    public void show(Prototype prototype, Batch batch, GlyphLayout layout, BitmapFont font) {
         this.prototype = prototype;
 
+        int width = Gdx.graphics.getWidth();
+        int height = Gdx.graphics.getHeight();
+
         batch.begin();
-        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(background, 0, 0, width, height);
         layout.setText(font, text.getText(), text.getColor(), text.getWidth(), Align.center, true);
         font.draw(batch, layout, text.getX(), text.getY());
 
-        if (transition != null) {
-            rectangle.set(transition.getX(), transition.getY(), transition.getWidth(), transition.getHeight());
-            textureTransition = transition.getSprite().getTexture();
-            batch.draw(textureTransition, transition.getX(), transition.getY(), transition.getWidth(), transition.getHeight());
-        }
+        /* Desenha texturas para os botões de transição da cena, definidos na classe
+            TransitionButtons. */
+        transitionButtons.getSpriteGoBack().draw(batch);
+        transitionButtons.getSpriteMoveOn().draw(batch);
 
         batch.end();
 
-        this.handleTransition(rectangle);
+        this.handleTransition(transitionButtons.getRectangeMoveOn(), transitionButtons.getRectangleGoBack());
     }
 
-    public void handleTransition(Rectangle rectangle) {
+    public void handleTransition(Rectangle rectangleMoveOn, Rectangle rectangleGoBack) {
         if (Gdx.input.justTouched()) {
-            if (transition != null) {
-                int x = Gdx.input.getX();
-                int y = Gdx.input.getY();
+            int x = Gdx.input.getX();
+            int y = Gdx.input.getY();
 
-                if (rectangle.contains(x, Gdx.graphics.getHeight() - y)) {
-                    toNext();
-                }
-            } else {
+            if (rectangleMoveOn.contains(x, Gdx.graphics.getHeight() - y))
                 toNext();
-            }
+
+            else if (rectangleGoBack.contains(x, Gdx.graphics.getHeight() - y))
+                toPrevious();
         }
     }
 
