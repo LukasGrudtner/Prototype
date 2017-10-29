@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initGame("game2.txt");
+                initGame("game2.json");
             }
         });
 
@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initGame("game3.txt");
+                initGame("game3.json");
             }
         });
     }

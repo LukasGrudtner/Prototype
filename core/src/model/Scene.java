@@ -1,17 +1,13 @@
 package model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 import com.prototype.Prototype;
-
-import java.util.ArrayList;
 
 /**
  * Created by Lukas on 21/08/2017.
@@ -21,10 +17,10 @@ public abstract class Scene {
 
     protected Prototype prototype;
     protected Texture background;
-    protected Text text;
+    protected model.text.Text text;
     private TransitionButtons transitionButtons;
 
-    public Scene(Texture background, Text text) {
+    public Scene(Texture background, model.text.Text text) {
         this.background = background;
         this.text = text;
         transitionButtons = new TransitionButtons();
@@ -38,8 +34,10 @@ public abstract class Scene {
 
         batch.begin();
         batch.draw(background, 0, 0, width, height);
-        layout.setText(font, text.getText(), text.getColor(), text.getSize(), Align.center, true);
+        layout.setText(font, text.getText(), text.getColor(), text.getSize(), text.getAlign(), true);
         font.draw(batch, layout, text.getX(), text.getY());
+
+
 
         /* Desenha texturas para os botões de transição da cena, definidos na classe
             TransitionButtons. */

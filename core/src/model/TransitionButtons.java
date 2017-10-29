@@ -11,8 +11,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class TransitionButtons {
 
-    private static final String MOVE_ON_TRANSITION_IMAGE_PATH = "seta.png";
-    private static final String GO_BACK_TRANSITION_IMAGE_PATH = "seta.png";
+    private static final String MOVE_ON_TRANSITION_IMAGE_PATH = "rightArrow.png";
+    private static final String GO_BACK_TRANSITION_IMAGE_PATH = "leftArrow.png";
     public static final int SCREEN_SIZE_RATIO = 8;
 
     private Rectangle rectangeMoveOn, rectangleGoBack;

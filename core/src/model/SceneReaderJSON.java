@@ -58,7 +58,7 @@ public class SceneReaderJSON {
             Texture textureBackground = new Texture(Gdx.files.internal(serializableScene.getBackgroundPath()));
 
             /* Define o texto. */
-            Text text = new Text();
+            model.text.Text text = new model.text.TextOnTopRight();
             text.setText(serializableScene.getText());
             text.setColor(new Color(serializableScene.getTextColorRed(), serializableScene.getTextColorGreen(),
                     serializableScene.getTextColorBlue(), serializableScene.getTextColorAlpha()));

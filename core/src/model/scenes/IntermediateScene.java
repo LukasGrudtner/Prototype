@@ -1,11 +1,9 @@
 package model.scenes;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import java.util.ArrayList;
 
 import model.Scene;
-import model.Text;
+import model.text.Text;
 
 /**
  * Created by Lukas on 21/08/2017.

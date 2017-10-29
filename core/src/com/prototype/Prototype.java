@@ -54,7 +54,7 @@ public class Prototype implements ApplicationListener {
         batch = new SpriteBatch();
 
         font = new BitmapFont();
-        font.getData().setScale(3);
+        font.getData().setScale(2);
 
         VIRTUAL_HEIGHT = Gdx.graphics.getHeight();
         VIRTUAL_WIDTH = Gdx.graphics.getWidth();
