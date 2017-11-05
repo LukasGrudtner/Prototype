@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initGame("game3.json");
+//                initGame("game3.json");
             }
         });
     }

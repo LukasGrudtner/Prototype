@@ -15,6 +15,10 @@ import java.util.ArrayList;
 
 import model.scenes.InitialScene;
 import model.scenes.IntermediateScene;
+import model.text.Text;
+import model.text.TextOnBottomCenter;
+import model.text.TextOnTopCenter;
+import model.text.TextOnTopRight;
 
 /**
  * Created by lukas on 25/08/2017.
@@ -22,6 +26,9 @@ import model.scenes.IntermediateScene;
 
 public class SceneReaderJSON {
 
+    private static final String TOP_RIGHT = "Top Right";
+    private static final String TOP_CENTER = "Top Center";
+    private static final String BOTTOM_CENTER = "Bottom Center";
     private String filePath;
 
     public SceneReaderJSON(String path) {
@@ -53,12 +60,20 @@ public class SceneReaderJSON {
     private ArrayList<Scene> createScenes(ArrayList<SerializableScene> serializableSceneList) {
         ArrayList<Scene> sceneList = new ArrayList<Scene>();
 
+
         for (SerializableScene serializableScene : serializableSceneList) {
             Scene scene = null;
             Texture textureBackground = new Texture(Gdx.files.internal(serializableScene.getBackgroundPath()));
 
             /* Define o texto. */
-            model.text.Text text = new model.text.TextOnTopRight();
+            Text text = null;
+            if (serializableScene.getTextPosition().equals(TOP_RIGHT))
+                text = new TextOnTopRight();
+            else if (serializableScene.getTextPosition().equals(TOP_CENTER))
+                text = new TextOnTopCenter();
+            else if (serializableScene.getTextPosition().equals(BOTTOM_CENTER))
+                text = new TextOnBottomCenter();
+
             text.setText(serializableScene.getText());
             text.setColor(new Color(serializableScene.getTextColorRed(), serializableScene.getTextColorGreen(),
                     serializableScene.getTextColorBlue(), serializableScene.getTextColorAlpha()));

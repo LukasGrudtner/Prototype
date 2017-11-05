@@ -7,20 +7,12 @@ public class SerializableScene {
 	private String sceneType;
 	private String backgroundPath;
 	private String text;
+	private String textPosition;
 	private int textColorRed;
 	private int textColorGreen;
 	private int textColorBlue;
 	private int textColorAlpha;
 	private int fontSize;
-	private int textX;
-	private int textY;
-	private int textWidth;
-	private int textHeight;
-	private String transitionImagePath;
-	private int transitionImageX;
-	private int transitionImageY;
-	private int transitionImageWidth;
-	private int transitionImageHeight;
 	
 	public SerializableScene() {
 	
@@ -79,75 +71,11 @@ public class SerializableScene {
 		this.fontSize = fontSize;
 	}
 	
-	public int getTextX() {
-		return textX;
+	public String getTextPosition() {
+		return textPosition;
 	}
-	
-	public void setTextX(int textX) {
-		this.textX = textX;
-	}
-	
-	public int getTextY() {
-		return textY;
-	}
-	
-	public void setTextY(int textY) {
-		this.textY = textY;
-	}
-	
-	public int getTextWidth() {
-		return textWidth;
-	}
-	
-	public void setTextWidth(int textWidth) {
-		this.textWidth = textWidth;
-	}
-	
-	public int getTextHeight() {
-		return textHeight;
-	}
-	
-	public void setTextHeight(int textHeight) {
-		this.textHeight = textHeight;
-	}
-	
-	public String getTransitionImagePath() {
-		return transitionImagePath;
-	}
-	
-	public void setTransitionImagePath(String transitionImagePath) {
-		this.transitionImagePath = transitionImagePath;
-	}
-	
-	public int getTransitionImageX() {
-		return transitionImageX;
-	}
-	
-	public void setTransitionImageX(int transitionImageX) {
-		this.transitionImageX = transitionImageX;
-	}
-	
-	public int getTransitionImageY() {
-		return transitionImageY;
-	}
-	
-	public void setTransitionImageY(int transitionImageY) {
-		this.transitionImageY = transitionImageY;
-	}
-	
-	public int getTransitionImageWidth() {
-		return transitionImageWidth;
-	}
-	
-	public void setTransitionImageWidth(int transitionImageWidth) {
-		this.transitionImageWidth = transitionImageWidth;
-	}
-	
-	public int getTransitionImageHeight() {
-		return transitionImageHeight;
-	}
-	
-	public void setTransitionImageHeight(int transitionImageHeight) {
-		this.transitionImageHeight = transitionImageHeight;
+
+	public void setTextPosition(String textPosition) {
+		this.textPosition = textPosition;
 	}
 }
