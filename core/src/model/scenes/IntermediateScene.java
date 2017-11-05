@@ -14,7 +14,7 @@ public class IntermediateScene extends Scene {
     private Scene previousScene;
     private Scene nextScene;
 
-    public IntermediateScene(Texture background, Text text) {
+    public IntermediateScene(String background, Text text) {
         super(background, text);
     }
 

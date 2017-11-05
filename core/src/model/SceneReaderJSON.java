@@ -63,7 +63,7 @@ public class SceneReaderJSON {
 
         for (SerializableScene serializableScene : serializableSceneList) {
             Scene scene = null;
-            Texture textureBackground = new Texture(Gdx.files.internal(serializableScene.getBackgroundPath()));
+            String background = serializableScene.getBackgroundPath();
 
             /* Define o texto. */
             Text text = null;
@@ -80,11 +80,11 @@ public class SceneReaderJSON {
 
             /* Inicializa a cena com base no seu tipo. */
             if (serializableScene.getSceneType().equals(model.scenes.InitialScene.class.getSimpleName()))
-                scene = new model.scenes.InitialScene(textureBackground, text);
+                scene = new model.scenes.InitialScene(background, text);
             else if (serializableScene.getSceneType().equals(model.scenes.IntermediateScene.class.getSimpleName()))
-                scene = new model.scenes.IntermediateScene(textureBackground, text);
+                scene = new model.scenes.IntermediateScene(background, text);
             else if (serializableScene.getSceneType().equals(model.scenes.FinalScene.class.getSimpleName()))
-                scene = new model.scenes.FinalScene(textureBackground, text);
+                scene = new model.scenes.FinalScene(background, text);
 
             sceneList.add(scene);
         }

@@ -13,7 +13,7 @@ public class FinalScene extends Scene {
 
     private Scene previousScene;
 
-    public FinalScene(Texture background, Text text) {
+    public FinalScene(String background, Text text) {
         super(background, text);
     }
 
