@@ -1,4 +1,4 @@
-package model;
+package model.scenes;
 
 import java.awt.Color;
 

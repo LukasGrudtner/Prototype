@@ -3,7 +3,6 @@ package model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -15,10 +14,12 @@ import java.util.ArrayList;
 
 import model.scenes.InitialScene;
 import model.scenes.IntermediateScene;
+import model.scenes.Scene;
+import model.scenes.SerializableScene;
 import model.text.Text;
-import model.text.TextOnBottomCenter;
-import model.text.TextOnTopCenter;
-import model.text.TextOnTopRight;
+
+import com.prototype.TextFactory;
+import com.prototype.SceneFactory;
 
 /**
  * Created by lukas on 25/08/2017.
@@ -26,9 +27,6 @@ import model.text.TextOnTopRight;
 
 public class SceneReaderJSON {
 
-    private static final String TOP_RIGHT = "Top Right";
-    private static final String TOP_CENTER = "Top Center";
-    private static final String BOTTOM_CENTER = "Bottom Center";
     private String filePath;
 
     public SceneReaderJSON(String path) {
@@ -62,29 +60,17 @@ public class SceneReaderJSON {
 
 
         for (SerializableScene serializableScene : serializableSceneList) {
-            Scene scene = null;
             String background = serializableScene.getBackgroundPath();
 
             /* Define o texto. */
-            Text text = null;
-            if (serializableScene.getTextPosition().equals(TOP_RIGHT))
-                text = new TextOnTopRight();
-            else if (serializableScene.getTextPosition().equals(TOP_CENTER))
-                text = new TextOnTopCenter();
-            else if (serializableScene.getTextPosition().equals(BOTTOM_CENTER))
-                text = new TextOnBottomCenter();
+            Text text = TextFactory.getTextClass(serializableScene.getTextPosition());
 
             text.setText(serializableScene.getText());
             text.setColor(new Color(serializableScene.getTextColorRed(), serializableScene.getTextColorGreen(),
                     serializableScene.getTextColorBlue(), serializableScene.getTextColorAlpha()));
 
             /* Inicializa a cena com base no seu tipo. */
-            if (serializableScene.getSceneType().equals(model.scenes.InitialScene.class.getSimpleName()))
-                scene = new model.scenes.InitialScene(background, text);
-            else if (serializableScene.getSceneType().equals(model.scenes.IntermediateScene.class.getSimpleName()))
-                scene = new model.scenes.IntermediateScene(background, text);
-            else if (serializableScene.getSceneType().equals(model.scenes.FinalScene.class.getSimpleName()))
-                scene = new model.scenes.FinalScene(background, text);
+            Scene scene = SceneFactory.getSceneClass(serializableScene.getSceneType(), background, text);
 
             sceneList.add(scene);
         }

@@ -1,8 +1,5 @@
 package model.scenes;
 
-import com.badlogic.gdx.graphics.Texture;
-
-import model.Scene;
 import model.text.Text;
 
 /**
