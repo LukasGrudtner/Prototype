@@ -3,7 +3,6 @@ package model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -15,11 +14,9 @@ import java.util.ArrayList;
 
 import model.scenes.InitialScene;
 import model.scenes.IntermediateScene;
-import model.scenes.FinalScene;
+import model.scenes.Scene;
+import model.scenes.SerializableScene;
 import model.text.Text;
-import model.text.TextOnBottomCenter;
-import model.text.TextOnTopCenter;
-import model.text.TextOnTopRight;
 
 import com.prototype.TextFactory;
 import com.prototype.SceneFactory;
@@ -30,9 +27,6 @@ import com.prototype.SceneFactory;
 
 public class SceneReaderJSON {
 
-    private static final String TOP_RIGHT = "Top Right";
-    private static final String TOP_CENTER = "Top Center";
-    private static final String BOTTOM_CENTER = "Bottom Center";
     private String filePath;
 
     public SceneReaderJSON(String path) {
@@ -76,7 +70,7 @@ public class SceneReaderJSON {
                     serializableScene.getTextColorBlue(), serializableScene.getTextColorAlpha()));
 
             /* Inicializa a cena com base no seu tipo. */
-            Scene scene = SceneFactory.getSceneClass(InitialScene.getClass().getSimpleName(), background, text);
+            Scene scene = SceneFactory.getSceneClass(InitialScene.class.getSimpleName(), background, text);
 
             sceneList.add(scene);
         }

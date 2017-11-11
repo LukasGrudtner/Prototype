@@ -4,15 +4,13 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import model.Scene;
+import model.scenes.Scene;
 
 
 public class Prototype implements ApplicationListener {
@@ -22,12 +20,7 @@ public class Prototype implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
     private GlyphLayout layout;
-    private Texture textureTransition;
 
-    private Rectangle rectangle;
-
-
-    private Factory factory;
     private String path;
 
     // Câmera
@@ -36,9 +29,6 @@ public class Prototype implements ApplicationListener {
     private float VIRTUAL_WIDTH = 0;
     private float VIRTUAL_HEIGHT = 0;
 
-    // Objetos padrões da tela
-
-
     public Prototype(String path) {
         this.path = path;
     }
@@ -46,11 +36,9 @@ public class Prototype implements ApplicationListener {
 	@Override
 	public void create() {
 
-        factory = new Factory();
-        currentScene = factory.getInitialScene(path);
+        currentScene = SceneFactory.getInitialScene(path);
 
         layout = new GlyphLayout();
-
         batch = new SpriteBatch();
 
         font = new BitmapFont();

@@ -1,4 +1,4 @@
-package model;
+package model.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Rectangle;
 import com.prototype.Prototype;
+
+import model.TransitionButtons;
 
 /**
  * Created by Lukas on 21/08/2017.

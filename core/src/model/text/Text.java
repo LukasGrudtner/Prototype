@@ -30,25 +30,10 @@ public abstract class Text {
     }
 
     public abstract int getSize();
-//    public int getSize() {
-//        /* Retira 1/10 do tamanho da tela de cada lado do texto. */
-//        int maxSize = Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()/5);
-//        return maxSize;
-//    }
 
     public abstract int getX();
-//    public int getX() {
-//        int margin = Gdx.graphics.getWidth() - this.getSize();
-//        return margin/2;
-//    }
 
     public abstract int getY();
-//    public int getY() {
-//        /* Define o número de linhas do texto, para ajustar a altura do texto na tela. */
-//        int extraLines = text.length()/50;
-//        int height = Gdx.graphics.getHeight();
-//        return extraLines*height/32 + height/8;
-//    }
 
     public abstract int getAlign();
 }

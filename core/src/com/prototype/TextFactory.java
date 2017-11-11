@@ -1,5 +1,6 @@
 package com.prototype;
 
+import model.text.Text;
 import model.text.TextOnBottomCenter;
 import model.text.TextOnTopCenter;
 import model.text.TextOnTopRight;
