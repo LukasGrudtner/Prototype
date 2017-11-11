@@ -70,7 +70,7 @@ public class SceneReaderJSON {
                     serializableScene.getTextColorBlue(), serializableScene.getTextColorAlpha()));
 
             /* Inicializa a cena com base no seu tipo. */
-            Scene scene = SceneFactory.getSceneClass(InitialScene.class.getSimpleName(), background, text);
+            Scene scene = SceneFactory.getSceneClass(serializableScene.getSceneType(), background, text);
 
             sceneList.add(scene);
         }
