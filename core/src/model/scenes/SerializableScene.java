@@ -1,5 +1,8 @@
 package model.scenes;
 
+import com.prototype.SceneFactory;
+import com.prototype.TextFactory;
+
 import java.awt.Color;
 
 public class SerializableScene {
@@ -18,8 +21,17 @@ public class SerializableScene {
 	
 	}
 
-	public String getSceneType() {
-		return sceneType;
+	public SceneFactory.SceneType getSceneType() {
+		switch (sceneType) {
+			case "InitialScene":
+				return SceneFactory.SceneType.INITIAL;
+			case "IntermediateScene":
+				return SceneFactory.SceneType.INTERMEDIATE;
+			case "FinalScene":
+				return SceneFactory.SceneType.FINAL;
+            default:
+                throw new RuntimeException();
+		}
 	}
 
 	public void setSceneType(String sceneType) {
@@ -71,8 +83,17 @@ public class SerializableScene {
 		this.fontSize = fontSize;
 	}
 	
-	public String getTextPosition() {
-		return textPosition;
+	public TextFactory.TextType getTextPosition() {
+		switch (textPosition) {
+			case "Bottom Center":
+				return TextFactory.TextType.BOTTOM_CENTER;
+			case "Top Right":
+				return TextFactory.TextType.TOP_RIGHT;
+			case "Top Center":
+				return TextFactory.TextType.TOP_CENTER;
+			default:
+				throw new RuntimeException();
+		}
 	}
 
 	public void setTextPosition(String textPosition) {

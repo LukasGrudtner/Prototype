@@ -7,6 +7,6 @@ import com.prototype.Prototype;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new Prototype(), config);
+		new LwjglApplication(new Prototype(""), config);
 	}
 }

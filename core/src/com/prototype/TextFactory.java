@@ -11,29 +11,20 @@ import model.text.TextOnTopRight;
 
  public class TextFactory {
 
-     private static final String BOTTOM_CENTER = "Bottom Center";
-     private static final String TOP_RIGHT = "Top Right";
-     private static final String TOP_CENTER = "Top Center";
+     public enum TextType {BOTTOM_CENTER, TOP_RIGHT, TOP_CENTER}
 
-     public static Text getTextClass(String textType) {
-
-         Text text;
+     public static Text getTextClass(TextType textType) {
 
          switch (textType) {
              case BOTTOM_CENTER:
-                text = new TextOnBottomCenter();
-                break;
+                return new TextOnBottomCenter();
              case TOP_RIGHT:
-                text = new TextOnTopRight();
-                break;
+                return new TextOnTopRight();
             case TOP_CENTER:
-                text = new TextOnTopCenter();
-                break;
+                return new TextOnTopCenter();
             default:
-                text = new TextOnBottomCenter();
+                throw new RuntimeException();
          }
-
-         return text;
      }
 
  }
