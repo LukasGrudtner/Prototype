@@ -13,34 +13,25 @@ import model.text.Text;
 
  public class SceneFactory {
 
-     private static final String INITIAL_SCENE = "InitialScene";
-     private static final String INTERMEDIATE_SCENE = "IntermediateScene";
-     private static final String FINAL_SCENE = "FinalScene";
+     public enum SceneType {INITIAL, INTERMEDIATE, FINAL}
 
      public static Scene getInitialScene(String path) {
          SceneReaderJSON sceneReader = new SceneReaderJSON(path);
         return sceneReader.getInitialScene();
      }
 
-     public static Scene getSceneClass(String sceneType, String background, Text text) {
-
-         Scene scene;
+     public static Scene getSceneClass(SceneType sceneType, String background, Text text) {
 
          switch (sceneType) {
-             case INITIAL_SCENE:
-                scene = new InitialScene(background, text);
-                break;
-            case INTERMEDIATE_SCENE:
-                scene = new IntermediateScene(background, text);
-                break;
-            case FINAL_SCENE:
-                scene = new FinalScene(background, text);
-                break;
+             case INITIAL:
+                return new InitialScene(background, text);
+             case INTERMEDIATE:
+                return new IntermediateScene(background, text);
+             case FINAL:
+                return new FinalScene(background, text);
             default:
-                scene = null;
+                throw new RuntimeException();
          }
-
-         return scene;
      }
 
  }
