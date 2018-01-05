@@ -1,16 +1,19 @@
 package model.scenes;
 
+import com.badlogic.gdx.Gdx;
 import com.prototype.SceneFactory;
 import com.prototype.TextFactory;
 
 import java.awt.Color;
 
+import model.text.Text;
+
 public class SerializableScene {
 	
-	private String sceneType;
+	public String sceneType;
 	private String backgroundPath;
 	private String text;
-	private String textPosition;
+	public String textPosition;
 	private int textColorRed;
 	private int textColorGreen;
 	private int textColorBlue;
@@ -84,6 +87,7 @@ public class SerializableScene {
 	}
 	
 	public TextFactory.TextType getTextPosition() {
+		Gdx.app.log("JSON", "TextPosition = " + textPosition);
 		switch (textPosition) {
 			case "Bottom Center":
 				return TextFactory.TextType.BOTTOM_CENTER;
