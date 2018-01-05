@@ -1,4 +1,4 @@
-package model;
+package screen_elements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,6 +24,7 @@ public class TransitionButtons {
 
         spriteMoveOn = new Sprite(new Texture(MOVE_ON_TRANSITION_IMAGE_PATH));
         spriteGoBack = new Sprite(new Texture(GO_BACK_TRANSITION_IMAGE_PATH));
+
         this.setSpritesBounds();
         this.setRectanglesBounds();
     }

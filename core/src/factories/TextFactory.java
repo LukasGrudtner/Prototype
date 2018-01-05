@@ -1,4 +1,4 @@
-package com.prototype;
+package factories;
 
 import model.text.Text;
 import model.text.TextOnBottomCenter;

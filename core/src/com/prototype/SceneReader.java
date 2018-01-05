@@ -1,16 +1,13 @@
-package model;
+package com.prototype;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import model.scenes.InitialScene;
@@ -18,39 +15,40 @@ import model.scenes.IntermediateScene;
 import model.scenes.Scene;
 import model.scenes.SerializableScene;
 import model.text.Text;
-import sun.rmi.runtime.Log;
 
-import com.prototype.TextFactory;
-import com.prototype.SceneFactory;
+import factories.TextFactory;
+import factories.SceneFactory;
 
 /**
  * Created by lukas on 25/08/2017.
  */
 
-public class SceneReaderJSON {
+public class SceneReader {
 
     private String filePath;
 
-    public SceneReaderJSON(String path) {
+    public SceneReader(String path) {
         this.filePath = path;
     }
 
+    /* Retorna a cena inicial. */
     public Scene getInitialScene() {
         ArrayList<Scene> sceneList = createScenes(readSerializableScenes());
         return setOrder(sceneList).get(0);
     }
 
+    /* Retorna uma lista com todas as serializable scenes. */
     private ArrayList<SerializableScene> readSerializableScenes() {
         ArrayList<SerializableScene> serializableSceneArrayList = new ArrayList<>();
+
         Gson gson = new Gson();
-        String stringJson = "";
 
         try {
             FileHandle fileHandle = Gdx.files.internal(filePath);
             Reader reader = fileHandle.reader();
             BufferedReader bufferedReader = new BufferedReader(reader);
 
-            stringJson = bufferedReader.readLine();
+            String stringJson = bufferedReader.readLine();
             while (stringJson != null) {
                 SerializableScene ss = gson.fromJson(stringJson, SerializableScene.class);
                 serializableSceneArrayList.add(ss);
@@ -64,6 +62,7 @@ public class SceneReaderJSON {
         return serializableSceneArrayList;
     }
 
+    /* Cria as cenas a partir da lista de serializable scenes. */
     private ArrayList<Scene> createScenes(ArrayList<SerializableScene> serializableSceneList) {
         ArrayList<Scene> sceneList = new ArrayList<Scene>();
 

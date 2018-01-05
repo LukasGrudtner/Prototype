@@ -8,5 +8,4 @@ eclipse.project {
 }
 dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
-    compile files('/home/lukasgrudtner/AndroidProjects/prototype/lib/json-simple-1.1.1.jar')
 }

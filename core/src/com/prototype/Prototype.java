@@ -36,7 +36,7 @@ public class Prototype implements ApplicationListener {
 	@Override
 	public void create() {
 
-        currentScene = SceneFactory.getInitialScene(path);
+        currentScene = factories.SceneFactory.getInitialScene(path);
 
         layout = new GlyphLayout();
         batch = new SpriteBatch();

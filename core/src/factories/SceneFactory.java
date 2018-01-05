@@ -1,7 +1,7 @@
-package com.prototype;
+package factories;
 
 import model.scenes.Scene;
-import model.SceneReaderJSON;
+import com.prototype.SceneReader;
 import model.scenes.InitialScene;
 import model.scenes.IntermediateScene;
 import model.scenes.FinalScene;
@@ -16,8 +16,8 @@ import model.text.Text;
      public enum SceneType {INITIAL, INTERMEDIATE, FINAL}
 
      public static Scene getInitialScene(String path) {
-         SceneReaderJSON sceneReader = new SceneReaderJSON(path);
-        return sceneReader.getInitialScene();
+         SceneReader sceneReader = new SceneReader(path);
+         return sceneReader.getInitialScene();
      }
 
      public static Scene getSceneClass(SceneType sceneType, String background, Text text) {
